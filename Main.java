@@ -3,126 +3,92 @@ package assignment;
 import java.util.Scanner;
 public class Main {
 
-    static final int ROWS = 3;
-    static final int COLUMNS = 3;
-    static int[][] arrayOfElements = new int[ROWS][COLUMNS];
+    static final int ROWS = 2;
+    static final int COLUMNS = 2;
     static int[][] firstMatrix = new int[ROWS][COLUMNS];
-    static int[][] temporary = new int[ROWS][COLUMNS];
     static int[][] secondMatrix = new int[ROWS][COLUMNS];
-
-/*
-Ex:
-[Row][COLUMN]
-[0][0] = 4;
-[0][1] = 5;
-[1][0] = 7;
-[1][1] = 8;
- */
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        int[][] firstMatrix = new int[ROWS][COLUMNS];
-        int[][] secondMatrix = new int[ROWS][COLUMNS];
+        inputNumbers(firstMatrix, "Matrix A");
+        inputNumbers(secondMatrix, "Matrix B");
+        displayMatrix();
+        displayAndCalculateMatrixAddition();
+    }
 
-
-        //First Input
-        System.out.println("MATRIX A ");
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLUMNS; j++) {
-                System.out.print("[" + i + "]" + "[" + j + "] = ");
-                firstMatrix[i][j] = scanner.nextInt();
-            }
-        }
-
-        //Second Input
-        System.out.println("MATRIX B ");
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLUMNS; j++) {
-                System.out.print("[" + i + "]" + "[" + j + "] = ");
-                secondMatrix[i][j] = scanner.nextInt();
-            }
-        }
-        System.out.println();
-
-        //Display Matrix A
-        System.out.println("Matrix A  "  + "   Matrix B");
-
-        for(int i = 0;i<ROWS;i++){
-                for(int j = 0;j<COLUMNS;j++){
-                    System.out.print(firstMatrix[i][j] + "  ");
-                    if((j+1) == COLUMNS) {
-                        System.out.print("     ");
-                        for (int x = 0; x < COLUMNS; x++)
-                            System.out.print(secondMatrix[i][x] + "  ");
+    //Input/Stored/Check/Catch the Error
+    public static void inputNumbers(int[][] arrayOfMatrix, String message) {
+        System.out.println(message);
+        for (int numberOfRows = 0; numberOfRows < ROWS; numberOfRows++) {
+            for (int numberOfColumns = 0; numberOfColumns < COLUMNS; numberOfColumns++) {
+                try {
+                    while (true) {
+                        System.out.print("[" + (numberOfRows + 1) + "]" + "[" + (numberOfColumns + 1) + "] = ");
+                        int elementsValue = scanner.nextInt();
+                        arrayOfMatrix[numberOfRows][numberOfColumns] = elementsValue;
+                        if (elementsValue >= 0 && elementsValue <= 9)
+                            break;
+                        System.out.println("Can't be Input less than 0 or greater than 9");
                     }
+                } catch (Exception error) {
+                    System.out.println("Input Error");
                 }
+            }
+        }
+    }
+
+    //Display Matrix A and Matrix B
+    public static void displayMatrix() {
+        System.out.println("\nMatrix A  " + " Matrix B");
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                System.out.print(firstMatrix[i][j] + "  ");
+                if ((j + 1) == COLUMNS) {
+                    System.out.print("     ");
+                    for (int x = 0; x < COLUMNS; x++)
+                        System.out.print(secondMatrix[i][x] + "  ");
+                }
+            }
             System.out.print("\n");
         }
     }
-}
-        /*   inputCheckedStoredNumbers("Matrix A ") ;
-        firstMatrix = temporary;
-        System.out.println(firstMatrix);
-        inputCheckedStoredNumbers("Matrix B ");
-        secondMatrix = temporary;
-        System.out.println(secondMatrix);
 
-
-    }
-
-    public static void inputCheckedStoredNumbers(String message) {
-        System.out.println(message);
-        int elementsValue = 0;
-        for (int numberOfRows = 0; numberOfRows < ROWS; numberOfRows++) {
-            for (int numberOfColumns = 0; numberOfColumns < COLUMNS; numberOfColumns++) {
-                try {
-                    while (true) {
-                        System.out.print("[" + numberOfRows + "]" + "[" + numberOfColumns + "] = ");
-                        elementsValue = scanner.nextInt();
-                        arrayOfElements[numberOfRows][numberOfColumns] = elementsValue;
-                        if (elementsValue >= 0 && elementsValue <= 9)
-                            break;
-                        System.out.println("Can't be Input less than 0 or greater than 9");
-                    }
-                } catch (Exception error) {
-                    System.out.println("Input Error");
-                }
-            }
-            System.out.println();
-        }
-        temporary = arrayOfElements;
-
-    }
-
-    public static void displayEachElement(String message) {
-        System.out.println(message);
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLUMNS; j++) {
-                System.out.print(arrayOfElements[i][j] + " ");
+    //The best function are those  with no parameters
+    public static void displayAndCalculateMatrixAddition() {
+        int sumOfTwoMatrix = 0;
+        System.out.println("\nResult Matrix  < Output");
+        for (int numberOfRow = 0; numberOfRow < ROWS; numberOfRow++) {
+            for (int numberOfColumn = 0; numberOfColumn < COLUMNS; numberOfColumn++) {
+                sumOfTwoMatrix = firstMatrix[numberOfRow][numberOfColumn] + secondMatrix[numberOfRow][numberOfColumn];
+                if(sumOfTwoMatrix>=10)
+                    System.out.print(" "+sumOfTwoMatrix);
+                else
+                    System.out.print("  "+ sumOfTwoMatrix);
             }
             System.out.println();
         }
     }
-
 }
-        /*
-        int elementsValue = 0;
-        for (int numberOfRows = 0; numberOfRows < ROWS; numberOfRows++) {
-            for (int numberOfColumns = 0; numberOfColumns < COLUMNS; numberOfColumns++) {
-                try {
-                    while (true) {
-                        elementsValue = scanner.nextInt();
-                        arrayOfElements[numberOfRows][numberOfColumns] = elementsValue;
-                        if (elementsValue >= 0 && elementsValue <= 9)
-                            break;
-                        System.out.println("Can't be Input less than 0 or greater than 9");
-                    }
-                } catch (Exception error) {
-                    System.out.println("Input Error");
-                }
-            }
-        }
-    }
 
-*/
+
+
+
+
+
+
+
+                /*
+                //Display Matrix A
+
+            */
+                /*Second Input
+                System.out.println("MATRIX B ");
+                for (int i = 0; i < ROWS; i++) {
+                    for (int j = 0; j < COLUMNS; j++) {
+                        System.out.print("[" + i + "]" + "[" + j + "] = ");
+                        secondMatrix[i][j] = scanner.nextInt();
+                    }
+                }
+                /
+                 */
