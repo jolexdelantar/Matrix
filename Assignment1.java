@@ -41,12 +41,13 @@ public class Assignment1 {
     //Input/Stored/Check/Catch the Error
     public static void inputNumbers(int[][] arrayOfMatrix, String message) {
         System.out.println(message);
+        int elementsValue;
         for (int numberOfRows = 0; numberOfRows < ROWS; numberOfRows++) {
             for (int numberOfColumns = 0; numberOfColumns < COLUMNS; numberOfColumns++) {
                 try {
                     while (true) {
                         System.out.print("[" + (numberOfRows + 1) + "]" + "[" + (numberOfColumns + 1) + "] = ");
-                        int elementsValue = scanner.nextInt();
+                        elementsValue = scanner.nextInt();
                         arrayOfMatrix[numberOfRows][numberOfColumns] = elementsValue;
                         if (elementsValue >= 0 && elementsValue <= 9)
                             break;
@@ -54,6 +55,7 @@ public class Assignment1 {
                     }
                 } catch (Exception error) {
                     System.out.println("Input Error");
+                    System.exit(0);
                 }
             }
         }
